@@ -9,7 +9,8 @@
     "dev": "nodemon src/server.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "sequelize": "^6.32.1"
   },
   "devDependencies": {
     "eslint": "^8.47.0",
@@ -19,6 +20,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.2",
+    "sequelize-cli": "^6.6.1",
     "sucrase": "^3.34.0"
   }
 }
