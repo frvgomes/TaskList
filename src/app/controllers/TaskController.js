@@ -27,5 +27,40 @@ class TaskController {
 
         return res.json(tasks);
     }
+
+    async update(req, res) {
+        const { task_id } = req.params;
+        const { check } = req.body;
+
+        const task = await Task.findByPk(task_id);
+        if (!task) {
+            return res.status(400).json({ error: 'Task não encontrada' });
+        }
+
+        if (!(typeof check === 'boolean')) {
+            return res.status(400).json({ error: 'Parâmetro inválido' });
+        }
+
+        await task.update({ check });
+
+        return res.json(task);
+    }
+
+    async delete(req, res) {
+        const { task_id } = req.params;
+
+        const task = await Task.findByPk(task_id);
+        if (!task) {
+            return res.status(400).json({ error: 'Task não encontrada' });
+        }
+
+        if (task.user_id !== req.userId) {
+            return res.status(401).json({ error: 'Exclusão não autorizada.' });
+        }
+
+        await task.destroy();
+
+        return res.send();
+    }
 }
 export default new TaskController();
